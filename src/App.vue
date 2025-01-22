@@ -27,20 +27,20 @@
       <div
         class="user-options_cart_container"
         v-if="
-          user.rolID == 1 ||
-          user.rolID == 3 ||
-          user.rolID == 4 ||
-          user.rolID == 5
+          user?.rolID == 1 ||
+          user?.rolID == 3 ||
+          user?.rolID == 4 ||
+          user?.rolID == 5
         "
       >
         <div id="user-options_admin">
-          <a href="/admin/home" class="linkA">{{ capitalize(user.rolName) }}</a>
+          <a href="/admin/home" class="linkA">{{ capitalize(user?.rolName) }}</a>
         </div>
         <Icon-Iconify class="icon" icon="eos-icons:admin-outlined" />
       </div>
 
       <div>
-        <div class="user-options_login_container" v-if="!userStore.isLogued">
+        <div class="user-options_login_container" v-if="!userStore?.isLogued">
           <div id="user-options_login">
             <p>Cuenta</p>
             <a href="/Auth" class="linkA">Ingresar</a>
