@@ -19,10 +19,6 @@ app.component('Icon-Iconify', Icon)
 
 app.use(createPinia())
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-  });
-  
 app.use(VueSweetalert2);
 
 app.use(router);
