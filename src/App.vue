@@ -9,14 +9,14 @@
       </div>
 
       <!-- Normal user -->
-      <div class="user-options_cart_container" v-if="user.rolID == 2">
+      <div class="user-options_cart_container" v-if="user?.rolID == 2 || !user">
         <div id="user-options_cart">
           <a href="/requests/list" class="linkA">Envíos</a>
         </div>
         <Icon-Iconify class="icon" icon="akar-icons:shipping-box-v2" />
       </div>
 
-      <div class="user-options_cart_container" v-if="user.rolID == 2">
+      <div class="user-options_cart_container" v-if="user?.rolID == 2 || !user">
         <div id="user-options_cart">
           <a href="/cart" class="linkA">Carrito</a>
         </div>
