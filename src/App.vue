@@ -3,7 +3,7 @@
     <!-- Header -->
     <header class="header">
       <div class="logo"><a href="/" class="linkA">Frish</a></div>
-      <div class="delivery" v-if="user.rolID != 1">
+      <div class="delivery" v-if="user?.rolID !== 1">
         <p>Agregar a</p>
         <a class="linkA" href="/cart">ingresar dirección</a>
       </div>
