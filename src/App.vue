@@ -43,7 +43,7 @@
         <div class="user-options_login_container" v-if="!userStore?.isLogued">
           <div id="user-options_login">
             <p>Cuenta</p>
-            <a href="/Auth" class="linkA">Ingresar</a>
+            <a href="/auth" class="linkA">Ingresar</a>
           </div>
           <Icon-Iconify class="icon" icon="hugeicons:user" />
         </div>
