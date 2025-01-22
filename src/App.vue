@@ -34,9 +34,7 @@
         "
       >
         <div id="user-options_admin">
-          <a href="/admin/home" class="linkA">{{
-            capitalize(user.rolName)
-          }}</a>
+          <a href="/admin/home" class="linkA">{{ capitalize(user.rolName) }}</a>
         </div>
         <Icon-Iconify class="icon" icon="eos-icons:admin-outlined" />
       </div>
