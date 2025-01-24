@@ -4,8 +4,9 @@
     <aside class="dashboard-sidebar">
       <h2>Panel Admin</h2>
       <ul>
-        <li @click="goToSection('orders')">Panel de Gestión</li>
-        <li @click="goToSection('users')">Estadísticas</li>
+        <!-- Utilizar la nueva función para mover la vista hacia las secciones -->
+        <li @click="scrollToSection('orders')">Panel de Gestión</li>
+        <li @click="scrollToSection('statistics')">Estadísticas</li>
       </ul>
     </aside>
 
@@ -17,22 +18,25 @@
       </header>
 
       <!-- Opciones de Gestión -->
-      <section class="management-options">
-        <div
-          v-for="option in managementOptions"
-          :key="option.name"
-          class="option-card"
-          @click="goToSection(option.link)"
-        >
-          <Icon-Iconify class="option-icon" :icon="option.icon" />
-          <h3>
-            <a class="linkA">{{ option.name }}</a>
-          </h3>
+      <h2>Opciones de Gestión</h2>
+      <section id="orders" class="management-options">
+        
+        <div class="option-card-container" v-for="option in managementOptions" :key="option.name">
+          <div
+            class="option-card"
+            @click="goToSection(option.link)"
+            v-if="option.id == 'orders' || user.rolID == 1"
+          >
+            <Icon-Iconify class="option-icon" :icon="option.icon" />
+            <h3>
+              <a class="linkA">{{ option.name }}</a>
+            </h3>
+          </div>
         </div>
       </section>
 
       <!-- Sección de Gráficas de Estadísticas -->
-      <section class="statistics-section">
+      <section id="statistics" class="statistics-section">
         <h2>Estadísticas Generales</h2>
         <div class="statistics-cards">
           <div
@@ -42,7 +46,7 @@
           >
             <h3>{{ stat.title }}</h3>
             <div class="stat-chart">
-              <!-- Placeholder para gráficos (se pueden integrar librerías de gráficos como Chart.js) -->
+              <!-- Placeholder para gráficos -->
               <span>{{ stat.value }}</span>
             </div>
           </div>
@@ -54,6 +58,7 @@
 
 <script>
 import { getAllStatistics } from "../../services/statisticsService.js";
+import { useUserStore } from "./../../pluggins/stores/userStore.js";
 
 export default {
   name: "HomeAdmin",
@@ -109,21 +114,24 @@ export default {
           link: "/admin/manageRequestType",
         },
       ],
-      statistics: [
-      ],
+      statistics: [],
     };
   },
+  mounted() {},
   async created() {
-    try {
-      
+    const userStore = useUserStore();
 
+    this.user = userStore.getUser;
+    console.log("mounted this.user: ", this.user);
+
+    try {
       let stats = await getAllStatistics();
       console.log("stats: ", stats);
 
       this.statistics = [
-      { title: "Pedidos del Mes", value: stats.data.OrdersThisMonth },
+        { title: "Pedidos del Mes", value: stats.data.OrdersThisMonth },
         { title: "$ Total del Mes", value: stats.data.MonthlySales },
-        { title: "Usuarios Registrados", value: stats.data.RegisteredUsers},
+        { title: "Usuarios Registrados", value: stats.data.RegisteredUsers },
         { title: "Productos en Stock", value: stats.data.ProductsInStock },
         { title: "Roles Activos", value: stats.data.ActiveRoles },
       ];
@@ -136,11 +144,22 @@ export default {
     goToSection(sectionId) {
       console.log(`Redireccionando a la sección: ${sectionId}`);
       this.$router.push(sectionId);
-      // Aquí puedes agregar la lógica de navegación a la sección específica
+    },
+    scrollToSection(sectionId) {
+      // Nueva función para hacer scroll hacia una sección específica
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        console.log(`Desplazándose a la sección: ${sectionId}`);
+      } else {
+        console.warn(`Sección no encontrada: ${sectionId}`);
+      }
     },
   },
 };
 </script>
+
+
 
 <style scoped>
 .dashboard-container {
@@ -194,8 +213,22 @@ export default {
   margin-bottom: 40px;
 }
 
-.option-card {
+.option-card-container{
   width: calc(25% - 20px);
+  /* background-color: #ecf0f1; */
+  /* background-color: #f2f9fa; */
+
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  /* cursor: pointer; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.option-card {
+  width: 100%;
+  /* height: 100%; */
   /* background-color: #ecf0f1; */
   background-color: #f2f9fa;
 

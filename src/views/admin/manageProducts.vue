@@ -154,7 +154,13 @@
         <h2>Agregar Imágenes al Producto</h2>
         <form enctype="multipart/form-data" @submit.prevent="submitImages">
           <label for="images">Seleccionar Imágenes</label>
-          <input type="file" multiple @change="handleFileUpload" accept="image/*" required />
+          <input
+            type="file"
+            multiple
+            @change="handleFileUpload"
+            accept="image/*"
+            required
+          />
 
           <button type="submit" class="add-btn">Añadir Imágenes</button>
         </form>
@@ -180,16 +186,49 @@
           <label for="name">Nombre</label>
           <input
             type="text"
+            id="productName"
             v-model="selectedProduct.Name"
             placeholder="Nombre del producto"
             required
+            class="input-field"
           />
 
           <label for="description">Descripción</label>
           <textarea
+            id="productDescription"
             v-model="selectedProduct.Description"
             placeholder="Descripción del producto"
+            class="input-field"
           ></textarea>
+
+          <label for="price">Precio</label>
+          <!-- <input
+            type="number"
+            id="productPrice"
+            v-model="selectedProduct.Price"
+            placeholder="Precio del producto"
+            required
+            class="input-field"
+          /> -->
+          <input
+            type="number"
+            id="productPrice"
+            v-model="selectedProduct.Price"
+            placeholder="Precio del producto"
+            required
+            class="input-field"
+            min="0"
+          />
+
+          <label for="stock">Stock</label>
+          <input
+            type="number"
+            id="productStock"
+            v-model="selectedProduct.Stock"
+            placeholder="Cantidad en stock"
+            class="input-field"
+            min="0"
+          />
 
           <button type="submit" class="update-btn">Actualizar Producto</button>
         </form>
@@ -242,7 +281,7 @@ export default {
     console.log("categories in manage products: ", this.categories);
   },
   methods: {
-    goBack(){
+    goBack() {
       this.$router.push("/admin/home");
     },
     async submitProduct() {
@@ -274,7 +313,7 @@ export default {
             title: "¡El producto ha sido creado satisfactoriamente!",
             icon: "success",
             confirmButtonText: "OK",
-            html: `<strong>${resCreated.data.msg}</strong>`,
+            html: "<strong>${resCreated.data.msg}</strong>",
           });
           console.log("resCreated: ", resCreated);
           this.productId = resCreated.data.productID;
@@ -326,6 +365,10 @@ export default {
       this.currentView = "editProduct";
     },
     async updateProductMethod() {
+      console.log(
+        "selectedProduct in updateProductMethod: ",
+        this.selectedProduct
+      );
       const result = await this.$swal({
         title: "¿Estás seguro de modificar el producto?",
         icon: "question",
@@ -392,7 +435,7 @@ export default {
 </script>
 
 <style scoped>
-.icon-button{
+.icon-button {
   /* margin: 60px 0px 0px 0px; */
   all: unset;
   cursor: pointer; /* Opcional, para mantener el comportamiento de clic */
@@ -404,7 +447,7 @@ export default {
   color: #018c91;
 }
 
-.btns{
+.btns {
   display: flex;
   justify-content: space-around;
 }
