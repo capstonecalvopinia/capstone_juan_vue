@@ -2,7 +2,7 @@
   <div id="login-container">
     <!-- Sección del formulario de inicio de sesión -->
     <div id="login-form">
-      <h1>Acceso<br />Frish</h1>
+      <h1>Inicio de Sesión<br />Frish Alimentos Congelados</h1>
       <form id="formLoginID" @submit.prevent="handleLogin">
         <label for="email">Correo</label>
         <input
@@ -193,7 +193,7 @@ export default {
 .login-button {
   width: 100%;
   padding: 12px;
-  background-color: #1abc9c;
+  background-color: #018c91;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -221,7 +221,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2cb1a4;
+  background-color: #018c91;
   color: #fff;
 }
 
