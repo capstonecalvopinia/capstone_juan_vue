@@ -25,7 +25,7 @@
           <div class="timeline-card">
             <h2>Paso 2: Envía el Comprobante</h2>
             <p>Envía el comprobante de tu transferencia al número:</p>
-            <p><strong>0997612857</strong></p>
+            <p><strong>0987612857</strong></p>
             <p>
               Incluye el código del pedido: <strong>{{ requestID }}</strong>
             </p>
@@ -41,9 +41,9 @@
 
         <div v-else-if="paymentType === 'Efectivo'" class="timeline">
           <div class="timeline-card">
-            <h2>Paso 1: Acércate a Nuestro Punto de Cobro</h2>
-            <p>Visita nuestra oficina en:</p>
-            <p><strong>Dirección:</strong> Calle Principal 123, Ciudad XYZ</p>
+            <h2>Paso 1: Acércate a Nuestro Punto de Venta</h2>
+            <p>Visita nuestra oficina en Ambato</p>
+            <p><strong>Dirección:</strong> Calle Marieta de Veintimilla y Joaquín Hervas</p>
           </div>
           <div class="timeline-card">
             <h2>Paso 2: Proporciona el Código del Pedido</h2>

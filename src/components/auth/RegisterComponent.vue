@@ -2,7 +2,7 @@
   <div class="register-container">
     <!-- Sección del formulario de registro -->
     <div class="register-form">
-      <h1>Registro<br />Frish</h1>
+      <h1>Registro de Usuario<br />Frish Alimentos Congelados</h1>
       <form id="registerFormId" @submit.prevent="handleRegister">
         <label for="name">Nombre</label>
         <input
@@ -239,14 +239,14 @@ export default {
       const res = await registerUser(userData);
       if (res.status) {
         await this.$swal({
-          title: "The user has been successfully registered.",
+          title: "El usuario se h registrado con éxito.",
           icon: "success",
           confirmButtonText: "OK",
         });
         this.$router.push("/");
       } else {
         await this.$swal({
-          title: "An error occurred while registering the user.",
+          title: "Ha ocurrido un error al registrar al usuario.",
           icon: "error",
           text: res.error,
         });
@@ -334,7 +334,7 @@ export default {
 .register-button {
   width: 100%;
   padding: 12px;
-  background-color: #1abc9c;
+  background-color: #018c91;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -362,7 +362,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2cb1a4;
+  background-color: #018c91;
   color: #fff;
 }
 

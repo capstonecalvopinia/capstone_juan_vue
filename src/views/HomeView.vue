@@ -22,9 +22,9 @@
         <!-- Texto promocional a la izquierda -->
         <div class="banner-text">
           <h2>
-            Frescura y calidad en cada corte,<span> ¡sabor que conquista!</span>
+            Frescura y calidad en cada corte,<span> ¡Sabor que conquista!</span>
           </h2>
-          <p>Consiguelo en nuestra tienda</p>
+          <p>Consíguelo en nuestra tienda</p>
         </div>
 
         <!-- Carrusel de imágenes a la derecha -->

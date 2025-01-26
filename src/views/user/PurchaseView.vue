@@ -62,10 +62,10 @@
                 required
               />
 
-              <label for="requestTypeID">Tipo de solicitud:</label>
+              <label for="requestTypeID">Método de Entrega:</label>
               <select id="requestTypeID" v-model="cart.requestTypeID" required>
                 <option value="" disabled>
-                  Selecciona un tipo de solicitud
+                  Selecciona un método de entrega
                 </option>
                 <option
                   :value="requestType.RequestTypeID"
@@ -247,7 +247,7 @@ export default {
                   Swal.fire({
                     title: "!Error!",
                     icon: "error",
-                    text: "No hemos podido valdiar el pago.",
+                    text: "No hemos podido validar el pago.",
                   });
                 }
               } catch (error) {
