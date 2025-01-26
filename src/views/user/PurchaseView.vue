@@ -415,6 +415,7 @@ export default {
         // Actualiza el carrito en el store
         cartStore.setCart(cart.value);
         const savedCart = cartStore.getCart;
+        console.log("savedCart Total: ", savedCart);
         const user = userStore.getUser;
 
         const cartToSend = {
@@ -431,7 +432,9 @@ export default {
           RequestedToDate: savedCart.requestedToDate,
           DeliveredDate: null,
           Products: savedCart.products,
+          Total: savedCart.Total
         };
+        console.log("cartToSend Total: ", cartToSend);
 
         if (cartToSend.PaymentTypeID == 3 && paypalPaymentState) {
           cartToSend.PaymentStateID = 2;

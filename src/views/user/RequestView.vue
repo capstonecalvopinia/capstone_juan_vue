@@ -49,6 +49,9 @@
             <p>
               <strong>Tipo de Pedido:</strong> {{ request.RequestType_Name }}
             </p>
+            <p>
+              <strong>Total:</strong> ${{ request.Total }}
+            </p>
           </div>
         </section>
 
@@ -77,7 +80,7 @@
               <div class="product-info">
                 <p><strong>Nombre:</strong> {{ product.Name }}</p>
                 <p><strong>Cantidad:</strong> {{ product.Quantity }}</p>
-                <p><strong>Precio:</strong> ${{ product.Price.toFixed(2) }}</p>
+                <p><strong>Precio Normal:</strong> ${{ product.Price.toFixed(2) }}</p>
               </div>
             </div>
           </div>
@@ -276,7 +279,14 @@ h1.order-title {
 }
 
 .product-info {
-  padding: 1rem;
+  padding: 2px 2px 2px 2px;
+
+}
+
+.product-info p{
+  width: fit-content !important;
+  text-align: left !important;
+
 }
 
 /* Línea de tiempo */

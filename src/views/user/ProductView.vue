@@ -20,7 +20,20 @@
           <div class="product-info">
             <h1>{{ product.Name }}</h1>
             <p class="product-description">{{ product.Description }}</p>
-            <p class="product-price">{{ product.Price }} $</p>
+
+            <!-- <p class="product-price">{{ product.Price }} $</p> -->
+            <div v-if="product.discounts.length <= 0">
+                <h3 class="product-price" >{{ product.Price }}$ - {{ product.UnitShortName }}</h3>
+              </div>
+              <div v-else>
+                <div class="crossedOut-container">
+                  <h3 class="crossedOut ">{{ product.Price }}$</h3>
+                  <h3 class="product-price"> | {{ product.PriceWithDiscount }}$</h3>
+                  <h3 class="product-price">- {{ product.UnitShortName }}</h3>
+                </div>
+              </div>
+
+
             <p class="product-stock">
               <span v-if="product.Stock > 0"
                 >En stock: {{ product.Stock }} {{ product.UnitShortName }}</span
@@ -113,10 +126,32 @@ export default {
     const productId = this.$route.params.id;
     this.backRoute = this.$route.params.backRoute;
     console.log("this.backRoute: ", this.backRoute);
+
     try {
       this.product = await fetchProductById(productId);
+
       console.log("this.product: ", this.product);
       this.product = this.product.product;
+
+      // Inicializamos la suma de descuentos
+      let totalDiscount = 0;
+
+      // Verificamos si el producto tiene descuentos
+      if (this.product.discounts && this.product.discounts.length > 0) {
+        // Sumamos todos los descuentos para ese producto
+        this.product.discounts.forEach((discount) => {
+          totalDiscount += discount.DiscountPercentage;
+        });
+      }
+
+      // Calculamos el precio con descuento
+      const PriceWithDiscount =
+      this.product.Price - (this.product.Price * totalDiscount) / 100;
+
+      // Guardamos el precio con descuento en el objeto
+      this.product.PriceWithDiscount = PriceWithDiscount;
+
+
       this.loading = false;
       const productData = {
         product_id: 1, // Producto de interés
@@ -215,14 +250,14 @@ export default {
       //cartStore.clearCart();
     },
     async addToCart() {
-      console.log("add to cart");
+      console.log("add to cart: ", this.product);
       const cartStore = useCartStore();
 
       // Producto a agregar al carrito
       const productToAdd = {
         productID: this.product.ProductID,
         name: this.product.Name,
-        price: this.product.Price,
+        price: this.product.PriceWithDiscount,
         quantity: this.quantity,
         image: this.product.Image,
       };
@@ -244,6 +279,15 @@ export default {
 </script>
 
 <style scoped>
+.crossedOut-container {
+  display: flex;
+}
+
+.crossedOut {
+  color: #cccccc !important;
+  text-decoration: line-through;
+}
+
 .popular {
   margin: 40px 0;
   text-align: center;

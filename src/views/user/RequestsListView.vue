@@ -37,6 +37,7 @@
             </p>
             <p><strong>Total Productos:</strong> {{ order.Products.length }}</p>
             <p><strong>Tipo de Pedido:</strong> {{ order.RequestType_Name }}</p>
+            <p><strong>Total:</strong> ${{ order.Total }}</p>
           </div>
         </div>
         <!-- Productos del pedido -->

@@ -90,6 +90,12 @@ export default {
           link: "/admin/manageProducts",
         },
         {
+          id: "discounts",
+          name: "Gestión de descuentos",
+          icon: "ic:twotone-discount",
+          link: "/admin/manageDiscount",
+        },
+        {
           id: "units",
           name: "Gestión de unidades",
           icon: "game-icons:weight",

@@ -16,6 +16,7 @@ import PurchaseView from "./views/user/PurchaseView.vue";
 import ShowRequest from "./views/admin/showRequest.vue";
 import PaymentTutorial from "./views/user/PaymentTutorial.vue";
 import RecipeDetailView from "./views/user/RecipeDetailView.vue";
+import ManageDiscount from "./views/admin/manageDiscounts.vue";
 
 //productos
 import ProductView from "./views/user/ProductView.vue";
@@ -79,6 +80,12 @@ const routes = [
     path: "/admin/manageUsers",
     name: "ManageUsers",
     component: ManageUsers,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/admin/manageDiscount",
+    name: "ManageDiscount",
+    component: ManageDiscount,
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   {

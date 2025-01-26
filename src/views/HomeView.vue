@@ -106,7 +106,16 @@
             <div class="item-info">
               <h3>{{ item.Name }}</h3>
               <p>{{ item.Description }}</p>
-              <h3>{{ item.Price }}$ - {{ item.UnitShortName }}</h3>
+              <div v-if="item.discounts.length <= 0">
+                <h3>{{ item.Price }}$ - {{ item.UnitShortName }}</h3>
+              </div>
+              <div v-else>
+                <div class="crossedOut-container">
+                  <h3 class="crossedOut">{{ item.Price }}$</h3>
+                  <h3> | {{ item.PriceWithDiscount }}$</h3>
+                  <h3>- {{ item.UnitShortName }}</h3>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -165,7 +174,28 @@ export default {
     this.user = userStore.getUser;
     console.log("mounted this.user: ", this.user);
 
-    const productspre = await fetchProducts();
+    let productspre = await fetchProducts();
+
+    productspre.forEach((product) => {
+      // Inicializamos la suma de descuentos
+      let totalDiscount = 0;
+
+      // Verificamos si el producto tiene descuentos
+      if (product.discounts && product.discounts.length > 0) {
+        // Sumamos todos los descuentos para ese producto
+        product.discounts.forEach((discount) => {
+          totalDiscount += discount.DiscountPercentage;
+        });
+      }
+
+      // Calculamos el precio con descuento
+      const PriceWithDiscount =
+        product.Price - (product.Price * totalDiscount) / 100;
+
+      // Guardamos el precio con descuento en el objeto
+      product.PriceWithDiscount = PriceWithDiscount;
+    });
+
     this.popularItems = productspre;
     setInterval(this.nextImage, 3000);
     console.log("this.popularItems: ", this.popularItems);
@@ -176,7 +206,7 @@ export default {
         userId: this.user.userID,
         topN: 6,
       });
-      //console.log("recommendations: ", recommendations);
+      console.log("recommendations: ", recommendations);
 
       // Validación de recomendaciones
       if (
@@ -221,7 +251,10 @@ export default {
 
   methods: {
     viewProduct(productId) {
-      this.$router.push({ name: "ProductDetails", params: { id: productId, backRoute:"/" } });
+      this.$router.push({
+        name: "ProductDetails",
+        params: { id: productId, backRoute: "/" },
+      });
     },
     changeSelectedCategory(category) {
       //console.log("select category: ", category);
@@ -253,10 +286,18 @@ export default {
 </script>
 
 <style scoped>
+.crossedOut-container {
+  display: flex;
+}
+.crossedOut {
+  color: #cccccc !important;
+  text-decoration: line-through;
+}
+
 .card-image {
-  width: auto;        /* El ancho de la imagen ocupa todo el ancho del contenedor */
-  height: 150px;      /* Altura fija para la imagen */
-  object-fit: cover;  
+  width: auto; /* El ancho de la imagen ocupa todo el ancho del contenedor */
+  height: 150px; /* Altura fija para la imagen */
+  object-fit: cover;
 }
 
 .container {

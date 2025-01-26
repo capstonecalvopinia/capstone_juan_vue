@@ -16,6 +16,7 @@ export const useCartStore = defineStore({
             requestedToDate: null,
             deliveredDate: null,
             products: [],
+            Total: 0
           }
         );
       } catch (error) {
@@ -30,6 +31,7 @@ export const useCartStore = defineStore({
           requestedToDate: null,
           deliveredDate: null,
           products: [],
+          Total: 0
         };
       }
     })(),
@@ -65,6 +67,7 @@ export const useCartStore = defineStore({
         deliveredDate: null,
         products: [],
         requestStateID: null,
+        Total: 0
       };
 
       try {
@@ -88,11 +91,13 @@ export const useCartStore = defineStore({
       if (existingProduct) {
         // Si existe, incrementa la cantidad
         existingProduct.quantity += product.quantity;
+        this.cart.Total += product.price * product.quantity;
         console.log("Producto existente actualizado:", existingProduct);
       } else {
         // Si no existe, agrégalo al carrito
         this.cart.products.push(product);
         console.log("Producto agregado al carrito:", product);
+        this.cart.Total += product.price * product.quantity;
       }
 
       this.saveCart();
