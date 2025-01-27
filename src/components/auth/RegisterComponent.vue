@@ -239,7 +239,7 @@ export default {
       const res = await registerUser(userData);
       if (res.status) {
         await this.$swal({
-          title: "El usuario se h registrado con éxito.",
+          title: "El usuario se ha registrado con éxito.",
           icon: "success",
           confirmButtonText: "OK",
         });
