@@ -206,9 +206,9 @@ export default {
       cartStore.setCart(cartToSend);
       // Muestra el mensaje de éxito
       await Swal.fire({
-        title: "¡Órden agregada al carrito!",
+        title: "¡Orden agregada al carrito!",
         icon: "success",
-        text: "Los datos de la orden seleccionada se han cargado al carrito actual, modificalo en la sección del carrito e inicia tu nuevo pedido desde allí.",
+        text: "Los datos de la orden seleccionada se han cargado al carrito actual, modifícalo en la sección del carrito e inicia tu nuevo pedido desde allí.",
       });
 
       this.$router.push(`/cart`);
