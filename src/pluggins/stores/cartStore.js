@@ -109,7 +109,10 @@ export const useCartStore = defineStore({
 
       // Filtra los productos para eliminar el producto especificado
       this.cart.products = this.cart.products.filter(
-        (product) => product.productID !== productID
+        (product) =>{
+          product.productID !== productID;
+          this.cart.Total -= product.price * product.quantity;
+        } 
       );
 
       this.saveCart();

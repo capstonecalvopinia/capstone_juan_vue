@@ -127,8 +127,20 @@ export default {
       cartStore.setCart(cart.value);
     };
 
+    // const removeProduct = (index) => {
+    //   cart.value.products.splice(index, 1);
+    //   cartStore.setCart(cart.value);
+    // };
     const removeProduct = (index) => {
+      const product = cart.value.products[index];
+      if (!product) return;
+
+      const totalToSubtract = product.quantity * product.price;
+      cart.value.Total -= totalToSubtract; // Restar el monto del producto eliminado
+
       cart.value.products.splice(index, 1);
+
+      console.log("car a enviar: ", cart);
       cartStore.setCart(cart.value);
     };
 
@@ -195,17 +207,20 @@ export default {
       this.$router.push("/");
     },
     viewProduct(productId) {
-      this.$router.push({ name: "ProductDetails", params: { id: productId, backRoute: "/cart" } });
+      this.$router.push({
+        name: "ProductDetails",
+        params: { id: productId, backRoute: "/cart" },
+      });
     },
   },
 };
 </script>
 
 <style scoped>
-.card-image{
-  width: auto;        /* El ancho de la imagen ocupa todo el ancho del contenedor */
-  height: 150px;      /* Altura fija para la imagen */
-  object-fit: cover;  
+.card-image {
+  width: auto; /* El ancho de la imagen ocupa todo el ancho del contenedor */
+  height: 150px; /* Altura fija para la imagen */
+  object-fit: cover;
 }
 
 .icon-button {

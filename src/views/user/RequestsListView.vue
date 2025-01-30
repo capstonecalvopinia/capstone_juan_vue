@@ -194,7 +194,7 @@ export default {
         RequestedToDate: null,
         DeliveredDate: null,
         Products: this.transformKeys(order.Products),
-        //order.RequestedToDate
+        Total: order.Total
       };
 
       const resCreateCart = await createCart(cartToSend);

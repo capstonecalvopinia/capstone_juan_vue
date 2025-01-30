@@ -235,6 +235,7 @@ export default {
         RequestedToDate: cart.requestedToDate,
         DeliveredDate: null,
         Products: cart.products,
+        Total: cart.Total
       };
       console.log("cartToSend: ", cartToSend);
 
