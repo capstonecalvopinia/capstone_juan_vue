@@ -433,12 +433,8 @@ export default {
         icon: "question",
         showCancelButton: true,
       });
-      console.log("this.selectedRequest: ", this.selectedRequest);
-
-      this.selectedRequest.RequestStateID = this.lastRequestState(
-        this.selectedRequest
-      )?.RequestStateID;
-      console.log("this.selectedRequest post: ", this.selectedRequest);
+      console.log("this.user: ", this.user);
+      console.log("this.selectedRequest.RequestStateID post: ", this.selectedRequest.RequestStateID);
       if (result.isConfirmed) {
         //se validan los roles para el cambio de estados:
 
