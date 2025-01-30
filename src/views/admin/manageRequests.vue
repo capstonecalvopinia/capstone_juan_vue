@@ -445,7 +445,7 @@ export default {
           this.selectedRequest.RequestStateID == 2
         ) {
           //id 4 es admin
-          if (this.user.userID != 1) {
+          if (this.user.rolID != 1) {
             let textMsg =
               "El rol del usuario no tiene permitido cambiar el estado del pedido a: " +
               this.selectedRequest.RequestState_Name;
@@ -465,7 +465,7 @@ export default {
           this.selectedRequest.RequestStateID == 4
         ) {
           //id 3 es financiero
-          if (this.user.userID != 3) {
+          if (this.user.rolID != 3) {
             let textMsg =
               "El rol del usuario no tiene permitido cambiar el estado del pedido a: " +
               this.selectedRequest.RequestState_Name;
@@ -485,7 +485,7 @@ export default {
           this.selectedRequest.RequestStateID == 6
         ) {
           //id 4 es bodeguero
-          if (this.user.userID != 4) {
+          if (this.user.rolID != 4) {
             let textMsg =
               "El rol del usuario no tiene permitido cambiar el estado del pedido a: " +
               this.selectedRequest.RequestState_Name;
@@ -505,7 +505,7 @@ export default {
           this.selectedRequest.RequestStateID == 8
         ) {
           // 5 = repartidor
-          if (this.user.userID != 5) {
+          if (this.user.rolID != 5) {
             let textMsg =
               "El rol del usuario no tiene permitido cambiar el estado del pedido a: " +
               this.selectedRequest.RequestState_Name;
