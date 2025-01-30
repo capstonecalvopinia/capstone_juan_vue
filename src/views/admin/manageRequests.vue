@@ -435,6 +435,10 @@ export default {
       });
       console.log("this.selectedRequest: ", this.selectedRequest);
 
+      this.selectedRequest.RequestStateID = this.lastRequestState(
+        this.selectedRequest
+      )?.RequestStateID;
+      console.log("this.selectedRequest post: ", this.selectedRequest);
       if (result.isConfirmed) {
         //se validan los roles para el cambio de estados:
 
