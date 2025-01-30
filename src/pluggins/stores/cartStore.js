@@ -80,6 +80,14 @@ export const useCartStore = defineStore({
 
     // Agrega un nuevo producto al carrito
     addProduct(product) {
+      if (typeof this.cart.Total !== "number" || isNaN(this.cart.Total)) {
+        console.log("cart.Total no es un número válido en addProduct en store.");
+        this.cart.Total = 0;
+      } else {
+        console.log("cart.Total es un número válido  en addProduct en store.");
+  
+      }
+
       console.log("Agregando producto al carrito:", product);
       console.log("this.cart en agregando proudcto al carrito: ", this.cart);
 

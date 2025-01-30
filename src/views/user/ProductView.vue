@@ -23,16 +23,19 @@
 
             <!-- <p class="product-price">{{ product.Price }} $</p> -->
             <div v-if="product.discounts.length <= 0">
-                <h3 class="product-price" >{{ product.Price }}$ - {{ product.UnitShortName }}</h3>
+              <h3 class="product-price">
+                {{ product.Price }}$ - {{ product.UnitShortName }}
+              </h3>
+            </div>
+            <div v-else>
+              <div class="crossedOut-container">
+                <h3 class="crossedOut">{{ product.Price }}$</h3>
+                <h3 class="product-price">
+                  | {{ product.PriceWithDiscount }}$
+                </h3>
+                <h3 class="product-price">- {{ product.UnitShortName }}</h3>
               </div>
-              <div v-else>
-                <div class="crossedOut-container">
-                  <h3 class="crossedOut ">{{ product.Price }}$</h3>
-                  <h3 class="product-price"> | {{ product.PriceWithDiscount }}$</h3>
-                  <h3 class="product-price">- {{ product.UnitShortName }}</h3>
-                </div>
-              </div>
-
+            </div>
 
             <p class="product-stock">
               <span v-if="product.Stock > 0"
@@ -146,11 +149,10 @@ export default {
 
       // Calculamos el precio con descuento
       const PriceWithDiscount =
-      this.product.Price - (this.product.Price * totalDiscount) / 100;
+        this.product.Price - (this.product.Price * totalDiscount) / 100;
 
       // Guardamos el precio con descuento en el objeto
       this.product.PriceWithDiscount = PriceWithDiscount;
-
 
       this.loading = false;
       const productData = {
@@ -222,6 +224,16 @@ export default {
       // Guarda la fecha actual en cart.requestedDate
       cart.requestedDate = currentDate;
 
+      let newTotal;
+
+      if (typeof cart.Total !== "number" || isNaN(cart.Total)) {
+        console.log("cart.Total no es un número válido.");
+        newTotal = 0;
+      } else {
+        console.log("cart.Total es un número válido.");
+        newTotal = cart.Total;
+      }
+
       const cartToSend = {
         UserID: user.userID,
         PriorityID: cart.priorityID != "" ? cart.priorityID : 1,
@@ -235,7 +247,7 @@ export default {
         RequestedToDate: cart.requestedToDate,
         DeliveredDate: null,
         Products: cart.products,
-        Total: cart.Total
+        Total: newTotal,
       };
       console.log("cartToSend: ", cartToSend);
 

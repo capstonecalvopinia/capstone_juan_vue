@@ -425,7 +425,7 @@ export default {
           PriorityReason: savedCart.PriorityReason,
           RequestTypeID: savedCart.requestTypeID,
           RequestStateID: 1,
-          PaymentTypeID: savedCart.paymentTypeID, //revisar
+          PaymentTypeID: savedCart.paymentTypeID, 
           PaymentStateID: 1,
           Address: savedCart.address,
           RequestedDate: savedCart.requestedDate,
